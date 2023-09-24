@@ -3,7 +3,9 @@ EDA:
 2. Check outliers
 3. Longer duration tend to become yes class
 4. Fewer campaign tend to become yes class
+5. Correlation
 
 Preprocessing:
 1. RandomUnderSampling
 2. Remove outliers (IQR)
+3. Label encoding "y"
