@@ -1,0 +1,9 @@
+EDA:
+1. Imbalance class
+2. Check outliers
+3. Longer duration tend to become yes class
+4. Fewer campaign tend to become yes class
+
+Preprocessing:
+1. RandomUnderSampling
+2. Remove outliers (IQR)

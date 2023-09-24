@@ -1,0 +1,91 @@
+# Path
+dataset_path: ../data/raw/bank-full.csv
+dataset_delimiter: ;
+train_path:
+- ../data/processed/X_train.pkl
+- ../data/processed/y_train.pkl
+valid_path:
+- ../data/processed/X_valid.pkl
+- ../data/processed/y_valid.pkl
+test_path:
+- ../data/processed/X_test.pkl
+- ../data/processed/y_test.pkl
+train_processed_path:
+- ../data/processed/X_train_processed.pkl
+- ../data/processed/y_train_processed.pkl
+valid_processed_path:
+- ../data/processed/X_valid_processed.pkl
+- ../data/processed/y_valid_processed.pkl
+test_processed_path:
+- ../data/processed/X_test_processed.pkl
+- ../data/processed/y_test_processed.pkl
+model_path: ../models/model.pkl
+training_log_path: ../log/training_log.json
+
+# Columns by data type
+int_columns:
+- age
+- balance
+- day
+- duration
+- campaign
+- pdays
+- previous
+nominal_columns:
+- job
+- marital
+- contact
+- default
+- housing
+- loan
+ordinal_columns:
+- education
+- month
+- poutcome
+
+# Predictors and label
+label: y
+predictors:
+- age
+- job
+- marital
+- education
+- default
+- balance
+- housing
+- loan
+- contact
+- day
+- month
+- duration
+- campaign
+- pdays
+- previous
+- poutcome
+
+# Range of data
+range_age:
+- 18
+- 95
+range_balance:
+- -8019
+- 102127
+range_day:
+- 1
+- 31
+range_duration:
+- 0
+- 4918
+range_campaign:
+- 1
+- 63
+range_pdays:
+- -1
+- 871
+range_previous:
+- 0
+- 275
+
+# Splitting size
+test_size: 0.3
+valid_size: 0.5
