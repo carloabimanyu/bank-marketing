@@ -90,17 +90,78 @@ range_previous:
 test_size: 0.3
 valid_size: 0.5
 
-# Month encoding
+# Columns to label encoding
+label_encoding_columns:
+- education
+- default
+- housing
+- loan
+- contact
+- month
+- "y"
+
+# Columns to one-hot encoding
+one_hot_encoding_columns:
+- job
+- poutcome
+
+# Label encoding
+education_code:
+  primary: 0
+  secondary: 1
+  tertiary: 2
+default_code:
+  "no": 0
+  "yes": 1
+housing_code:
+  "no": 0
+  "yes": 1
+loan_code:
+  "no": 0
+  "yes": 1
+contact_code:
+  unknown: 0
+  cellular/telephone: 1
 month_code:
-- jan
-- feb
-- mar
-- apr
-- may
-- jun
-- jul
-- aug
-- sep
-- oct
-- nov
-- dec
+  jan: 0
+  feb: 1
+  mar: 2
+  apr: 3
+  may: 4
+  jun: 5
+  jul: 6
+  aug: 7
+  sep: 8
+  oct: 9
+  nov: 10
+  dec: 11
+y_code:
+  "no": 0
+  "yes": 1
+
+# Job re-categorize
+job_new_category:
+  keep:
+    - blue-collar
+    - student
+    - retired
+  replace: others
+
+# Education replace
+education_replace:
+  from:
+    - secondary
+    - unknown
+  to: secondary
+
+# Merge contact
+contact_merge:
+  from:
+    - cellular
+    - telephone
+  to: cellular/telephone
+
+# Pdays replace
+pdays_replace:
+  from: -1
+  to: 999
