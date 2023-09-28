@@ -46,10 +46,7 @@ def feature_engineering(data):
     # 0. Copy data
     data = data.copy()
 
-    # 1. Drop marital column
-    data = data.drop(columns=["marital"], axis=1)
-
-    # 2. One-Hot encoding
+    # 1. One-Hot encoding
     for column in config["one_hot_encoding_columns"]:
         encoder = OneHotEncoder(drop="first", handle_unknown="error")
         encoder.fit(preprocessing(train)[[column]])

@@ -47,8 +47,6 @@ ordinal_columns:
 label: y
 predictors:
 - age
-- job
-- marital
 - education
 - default
 - balance
@@ -61,7 +59,14 @@ predictors:
 - campaign
 - pdays
 - previous
-- poutcome
+- job_others
+- job_retired
+- job_student
+- poutcome_other
+- poutcome_success
+- poutcome_unknown
+- marital_married
+- marital_single
 
 # Range of data
 range_age:
@@ -104,6 +109,7 @@ label_encoding_columns:
 one_hot_encoding_columns:
 - job
 - poutcome
+- marital
 
 # Label encoding
 education_code:
