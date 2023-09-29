@@ -1,0 +1,20 @@
+name: bank_marketing_prediction
+services:
+  streamlit:
+    build: docker/streamlit
+    image: carloabimanyu/bank_marketing_streamlit
+    container_name: streamlit_frontend
+    depends on:
+      - api
+    ports:
+      - 8501:8501
+    volume:
+      - ./:/home/
+  api:
+    build: docker/api
+    image: carloabimanyu/bank_marketing_api
+    container_name: api_backend
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/home/ 
