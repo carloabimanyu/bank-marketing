@@ -62,7 +62,7 @@ def check_data(input_data: pd.DataFrame, config: dict):
 
 def split_data(input_data: pd.DataFrame, config: dict):
     # Split predictor(s) and label
-    X = input_data[config["predictors"]].copy()
+    X = input_data.drop(columns=config["label"]).copy()
     y = input_data[config["label"]].copy()
 
     # 1st split train and test
