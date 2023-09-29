@@ -20,7 +20,10 @@ def load_dataset(config_data: dict):
 
     return train, valid, test
 
-def preprocessing(data):
+def preprocessing(data, is_api: bool):
+    # 0. Load config
+    config = utils.load_config()
+
     # 0. Copy data
     data = data.copy()
 
@@ -37,19 +40,31 @@ def preprocessing(data):
     data["pdays"] = data["pdays"].apply(lambda x: config["pdays_replace"]["to"] if x == config["pdays_replace"]["from"] else x)
 
     # 5. Label encoding
-    for column in config["label_encoding_columns"]:
+    if is_api:
+        columns = config["label_encoding_columns"]
+        columns.remove("y")
+    else:
+        columns = config["label_encoding_columns"]
+
+    for column in columns:
         data[column] = data[column].apply(lambda x: config[f"{column}_code"][x])
     
     return data
 
 def feature_engineering(data):
+    # 0. Load config file
+    config = utils.load_config()
+
+    # 0. Load dataset
+    train, valid, test = load_dataset(config)
+
     # 0. Copy data
     data = data.copy()
 
     # 1. One-Hot encoding
     for column in config["one_hot_encoding_columns"]:
         encoder = OneHotEncoder(drop="first", handle_unknown="error")
-        encoder.fit(preprocessing(train)[[column]])
+        encoder.fit(preprocessing(train, is_api=False)[[column]])
         encoded_data = encoder.transform(data[[column]])
         encoded_df = pd.DataFrame(encoded_data.toarray(),
                                   columns=encoder.get_feature_names_out([column]),
@@ -67,9 +82,9 @@ if __name__ == "__main__":
     train, valid, test = load_dataset(config)
 
     # 3. Preprocessing dataset
-    train_processed = preprocessing(train)
-    valid_processed = preprocessing(valid)
-    test_processed = preprocessing(test)
+    train_processed = preprocessing(train, is_api=False)
+    valid_processed = preprocessing(valid, is_api=False)
+    test_processed = preprocessing(test, is_api=False)
 
     # 4. Feature engineering
     train_processed = feature_engineering(train_processed)
