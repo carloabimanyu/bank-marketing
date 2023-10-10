@@ -1,3 +1,9 @@
+# Project
+PROJECT: adi-mlops
+REGION: asia-southeast2
+BUCKET: gs://adi-mlops-bucket
+DATASET_DISPLAY_NAME: bank-marketing
+
 # Path
 dataset_path: ../data/raw/bank-full.csv
 dataset_delimiter: ;

@@ -1,9 +1,9 @@
 import os
 import pandas as pd
-import util as utils
 import copy
 
 from sklearn.model_selection import train_test_split
+from . import util as utils
 
 def read_raw_data(config: dict) -> pd.DataFrame:
     # Return raw dataset

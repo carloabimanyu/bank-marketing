@@ -1,9 +1,9 @@
 import os
-import util as utils
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from imblearn.under_sampling import RandomUnderSampler
+from . import util as utils
 
 def load_dataset(config_data: dict):
     X_train = utils.pickle_load(os.path.join(os.path.dirname(__file__), config_data["train_processed_path"][0]))
