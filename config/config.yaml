@@ -1,32 +1,36 @@
-# Project
-PROJECT: adi-mlops
-REGION: asia-southeast2
-BUCKET: gs://adi-mlops-bucket
-DATASET_DISPLAY_NAME: bank-marketing
-
 # Path
 dataset_path: ../data/raw/bank-full.csv
 dataset_delimiter: ;
 train_path:
 - ../data/processed/X_train.pkl
 - ../data/processed/y_train.pkl
+- ../data/processed/train.pkl
 valid_path:
 - ../data/processed/X_valid.pkl
 - ../data/processed/y_valid.pkl
+- ../data/processed/valid.pkl
 test_path:
 - ../data/processed/X_test.pkl
 - ../data/processed/y_test.pkl
+- ../data/processed/test.pkl
 train_processed_path:
 - ../data/processed/X_train_processed.pkl
 - ../data/processed/y_train_processed.pkl
+- ../data/processed/train_processed.pkl
 valid_processed_path:
 - ../data/processed/X_valid_processed.pkl
 - ../data/processed/y_valid_processed.pkl
+- ../data/processed/valid_processed.pkl
 test_processed_path:
 - ../data/processed/X_test_processed.pkl
 - ../data/processed/y_test_processed.pkl
-model_path: ../models/model.pkl
+- ../data/processed/test_processed.pkl
+model_path: ../models/classifier.pkl
 training_log_path: ../log/training_log.json
+
+# Splitting size
+test_size: 0.3
+valid_size: 0.5
 
 # Columns by data type
 int_columns:
@@ -48,31 +52,6 @@ ordinal_columns:
 - education
 - month
 - poutcome
-
-# Predictors and label
-label: y
-predictors:
-- age
-- education
-- default
-- balance
-- housing
-- loan
-- contact
-- day
-- month
-- duration
-- campaign
-- pdays
-- previous
-- job_others
-- job_retired
-- job_student
-- poutcome_other
-- poutcome_success
-- poutcome_unknown
-- marital_married
-- marital_single
 
 # Range of data
 range_age:
@@ -97,9 +76,32 @@ range_previous:
 - 0
 - 275
 
-# Splitting size
-test_size: 0.3
-valid_size: 0.5
+# Job re-categorize
+job_new_category:
+  keep:
+    - blue-collar
+    - student
+    - retired
+  replace: others
+
+# Education replace
+education_replace:
+  from:
+    - secondary
+    - unknown
+  to: secondary
+
+# Merge contact
+contact_merge:
+  from:
+    - cellular
+    - telephone
+  to: cellular/telephone
+
+# Pdays replace
+pdays_replace:
+  from: -1
+  to: 999
 
 # Columns to label encoding
 label_encoding_columns:
@@ -110,12 +112,6 @@ label_encoding_columns:
 - contact
 - month
 - "y"
-
-# Columns to one-hot encoding
-one_hot_encoding_columns:
-- job
-- poutcome
-- marital
 
 # Label encoding
 education_code:
@@ -151,29 +147,33 @@ y_code:
   "no": 0
   "yes": 1
 
-# Job re-categorize
-job_new_category:
-  keep:
-    - blue-collar
-    - student
-    - retired
-  replace: others
+# Columns to one-hot encoding
+one_hot_encoding_columns:
+- job
+- poutcome
+- marital
 
-# Education replace
-education_replace:
-  from:
-    - secondary
-    - unknown
-  to: secondary
-
-# Merge contact
-contact_merge:
-  from:
-    - cellular
-    - telephone
-  to: cellular/telephone
-
-# Pdays replace
-pdays_replace:
-  from: -1
-  to: 999
+# Predictors and label
+label: y
+predictors:
+- age
+- education
+- default
+- balance
+- housing
+- loan
+- contact
+- day
+- month
+- duration
+- campaign
+- pdays
+- previous
+- job_others
+- job_retired
+- job_student
+- poutcome_other
+- poutcome_success
+- poutcome_unknown
+- marital_married
+- marital_single
